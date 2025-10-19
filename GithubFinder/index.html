@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GitHub Finder — Simple</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="app">
+    <h1>GitHub Finder</h1>
+
+    <div class="search">
+      <input id="username" placeholder="Enter GitHub username (eg: octocat)" />
+      <button id="searchBtn">Find</button>
+    </div>
+
+    <div id="profile" class="card hidden"></div>
+
+    <div id="repos" class="card hidden"></div>
+
+    <div id="commitGraph" class="card hidden">
+      <h3>Commits per day (selected repo)</h3>
+      <canvas id="commitChart" width="800" height="250"></canvas>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
