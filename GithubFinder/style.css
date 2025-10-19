@@ -30,7 +30,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   transition: background 0.4s ease, color 0.4s ease;
   min-height: 100vh;
   display: flex;
@@ -51,9 +51,8 @@ body {
 }
 
 .logo {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: var(--accent);
+  height: 48px;
+  width: auto;
 }
 
 .header-buttons {
@@ -68,9 +67,11 @@ body {
   border-radius: 6px;
   padding: 5px 8px;
   font-size: 0.8rem;
+  font-weight: 500;
   color: var(--text);
   cursor: pointer;
-  transition: background 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+  font-family: "Poppins", sans-serif;
+  transition: background 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease, transform 0.3s ease;
 }
 
 .theme-toggle:hover, .back-btn:hover {
@@ -78,6 +79,7 @@ body {
   color: #fff;
   border-color: var(--accent);
   box-shadow: 0 2px 6px var(--shadow);
+  transform: scale(1.05);
 }
 
 .container {
@@ -98,6 +100,7 @@ body {
   color: var(--text);
   margin: 0;
   font-weight: 600;
+  font-family: "Poppins", sans-serif;
 }
 
 .landing-subtitle {
@@ -108,6 +111,7 @@ body {
   margin-left: auto;
   margin-right: auto;
   line-height: 1.6;
+  font-family: "Poppins", sans-serif;
 }
 
 .typing-effect {
@@ -115,65 +119,78 @@ body {
   color: var(--accent);
   margin-bottom: 25px;
   height: 1.5em;
+  font-family: "Poppins", sans-serif;
 }
 
 .search {
   display: flex;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   margin: 20px 0;
 }
 
+/* Glassy, bigger search input with glow */
 .search input {
   width: 100%;
-  max-width: 360px;
-  padding: 8px 14px;
-  border-radius: 6px;
+  max-width: 400px;
+  padding: 12px 16px;
+  border-radius: 12px;
   border: 1px solid var(--border);
-  font-size: 0.9rem;
+  font-size: 1rem;
   outline: none;
-  transition: border-color 0.5s ease, box-shadow 0.5s ease;
-  background: var(--card);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
   color: var(--text);
+  font-family: "Poppins", sans-serif;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
+}
+
+body[data-theme="dark"] .search input {
+  background: rgba(22, 27, 34, 0.3);
 }
 
 .search input:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 6px var(--shadow);
+  box-shadow: 0 0 12px var(--accent);
+  transform: scale(1.02);
 }
 
 .search-btn {
-  padding: 6px 10px;
-  border-radius: 6px;
+  padding: 10px 16px;
+  border-radius: 12px;
   background: var(--accent);
   border: none;
   color: #fff;
-  font-size: 0.85rem;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.5s ease, box-shadow 0.5s ease;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
+  font-family: "Poppins", sans-serif;
+  transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
 }
 
 .search-btn:hover {
   background: #2a8f3a;
-  box-shadow: 0 2px 6px var(--shadow);
+  box-shadow: 0 0 12px var(--accent);
+  transform: scale(1.05);
 }
 
 .card {
   background: var(--card);
   backdrop-filter: var(--glass-blur);
   padding: 20px;
-  border-radius: 6px;
+  border-radius: 12px;
   border: 1px solid var(--border);
   margin-bottom: 30px;
-  transition: box-shadow 0.5s ease;
+  transition: box-shadow 0.5s ease, transform 0.3s ease;
+  font-family: "Poppins", sans-serif;
 }
 
 .card:hover {
-  box-shadow: 0 4px 10px var(--shadow);
+  box-shadow: 0 4px 12px var(--shadow);
+  transform: translateY(-2px);
 }
 
 .hidden {
@@ -204,12 +221,14 @@ body {
   margin: 0;
   font-size: 1.5rem;
   color: var(--text);
+  font-family: "Poppins", sans-serif;
 }
 
 .profile-info .bio {
   font-size: 0.9rem;
   color: var(--muted);
   margin: 8px 0;
+  font-family: "Poppins", sans-serif;
 }
 
 .profile-stats {
@@ -219,6 +238,7 @@ body {
   font-size: 0.85rem;
   color: var(--text);
   margin-top: 12px;
+  font-family: "Poppins", sans-serif;
 }
 
 .profile-stats span {
@@ -235,13 +255,14 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  font-family: "Poppins", sans-serif;
 }
 
 .repo {
   background: var(--repo-bg);
   backdrop-filter: var(--glass-blur);
   padding: 12px;
-  border-radius: 6px;
+  border-radius: 12px;
   border: 1px solid var(--border);
   display: flex;
   flex-direction: column;
@@ -249,13 +270,14 @@ body {
 }
 
 .repo:hover {
-  box-shadow: 0 2px 6px var(--shadow);
+  box-shadow: 0 2px 8px var(--shadow);
 }
 
 .repo a {
   color: var(--accent);
   text-decoration: none;
   font-weight: 600;
+  font-family: "Poppins", sans-serif;
 }
 
 .repo a:hover {
@@ -270,22 +292,24 @@ body {
 
 .repo button {
   padding: 4px 8px;
-  border-radius: 6px;
+  border-radius: 12px;
   background: var(--accent);
   border: none;
   color: #fff;
   font-size: 0.75rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.5s ease, box-shadow 0.5s ease;
+  transition: background 0.5s ease, box-shadow 0.5s ease, transform 0.3s ease;
   display: flex;
   align-items: center;
   gap: 4px;
+  font-family: "Poppins", sans-serif;
 }
 
 .repo button:hover {
   background: #2a8f3a;
-  box-shadow: 0 2px 6px var(--shadow);
+  box-shadow: 0 0 10px var(--accent);
+  transform: scale(1.05);
 }
 
 .chart-container {
@@ -302,6 +326,7 @@ body {
   background: var(--footer-bg);
   border-top: 1px solid var(--border);
   margin-top: auto;
+  font-family: "Poppins", sans-serif;
 }
 
 @keyframes fadeIn {
@@ -316,4 +341,52 @@ body {
 
 @keyframes blink-caret {
   50% { border-color: transparent; }
+}
+
+/* .sparkle {
+  position: fixed; 
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  animation: sparkle-fade 0.3s forwards;
+  background: #2ea043;
+  box-shadow: 0 0 8px 2px #2ea043;
+}
+@keyframes sparkle-fade {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+} */
+.sparkle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  animation: sparkle-fade 0.5s forwards;
+  /* Star shape using clip-path */
+  clip-path: polygon(
+    50% 0%, 61% 35%, 98% 35%, 
+    68% 57%, 79% 91%, 50% 70%, 
+    21% 91%, 32% 57%, 2% 35%, 
+    39% 35%
+  );
+}
+
+@keyframes sparkle-fade {
+  0% {
+    opacity: 1;
+    transform: scale(0.5) rotate(0deg);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.2) rotate(180deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0) rotate(360deg);
+  }
 }

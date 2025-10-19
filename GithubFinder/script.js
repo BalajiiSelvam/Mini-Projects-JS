@@ -48,7 +48,7 @@ function showProfile(user) {
         <div class="bio">${user.bio || 'No bio available'}</div>
         <div class="profile-stats">
           <span><i class="fas fa-users"></i> Followers: ${user.followers}</span>
-          <span><i class="fas fa-user-friends"></i> Following: ${user.following}</span>
+          <span><i class="fas fa-user-group"></i> Following: ${user.following}</span>
           <span><i class="fas fa-code"></i> Public Repos: ${user.public_repos}</span>
         </div>
       </div>
@@ -205,10 +205,10 @@ async function buildCommitGraph(owner, repo, canvas) {
 
 function initTypingEffect() {
   const phrases = [
-    'Find any account instantly',
-    'Explore projects easily',
-    'Track recent commits',
-    'Discover GitHub profiles'
+    'Find any account instantly 🔍',
+    'Explore projects easily ✨',
+    'Track recent commits 🎯',
+    'Discover GitHub profiles 💫'
   ];
   let currentPhrase = 0;
   let isDeleting = false;
