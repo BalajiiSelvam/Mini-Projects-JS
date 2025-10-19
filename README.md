@@ -12,8 +12,7 @@ A sleek and interactive web app to **discover GitHub profiles instantly**, explo
 
 ## 🌐 Demo
 
-You can add your live demo link here:  
-[GitHub Finder Live](#)
+You can add your live demo link here:  https://github-finder-one-rho.vercel.app
 
 ---
 
@@ -46,5 +45,12 @@ You can add your live demo link here:
 - Make it **responsive for mobile devices** with better touch interactions  
 - Integrate **GitHub OAuth** for private repo access  
 - Enhance sparkle cursor effect with **different particle shapes and trails**  
+
+---
+
+## 🧑‍💻 Author
+
+**👋 Balaji Selvam**  
+📍 Developer | Tech Enthusiast | Lifelong Learner  
 
 ---
