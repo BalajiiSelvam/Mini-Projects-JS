@@ -2,12 +2,7 @@ const searchBtn = document.getElementById('searchBtn');
 const usernameInput = document.getElementById('username');
 const profileEl = document.getElementById('profile');
 const reposEl = document.getElementById('repos');
-const commitGraphEl = document.getElementById('commitGraph');
 const landingEl = document.getElementById('landing');
-const ctx = document.getElementById('commitChart').getContext('2d');
-let commitChart = null;
-
-// Optional: GitHub Personal Access Token (PAT)
 const token = '';
 
 function headers() {
@@ -16,7 +11,10 @@ function headers() {
 
 searchBtn.addEventListener('click', () => {
   const username = usernameInput.value.trim();
-  if (!username) return alert('Please enter a GitHub username');
+  if (!username) {
+    alert('Please enter a GitHub username');
+    return;
+  }
   fetchUser(username);
 });
 
@@ -27,7 +25,7 @@ async function fetchUser(username) {
     if (!res.ok) throw new Error('User not found');
     const user = await res.json();
     showProfile(user);
-    fetchRepos(username);
+    await fetchRepos(username);
     landingEl.classList.add('hidden');
   } catch (err) {
     alert(err.message);
@@ -54,9 +52,14 @@ function showProfile(user) {
 }
 
 async function fetchRepos(username) {
-  const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=updated`, { headers: headers() });
-  const repos = await res.json();
-  showRepos(username, repos);
+  try {
+    const res = await fetch(`https://api.github.com/users/${username}/repos?per_page=100&sort=updated`, { headers: headers() });
+    if (!res.ok) throw new Error('Failed to fetch repositories');
+    const repos = await res.json();
+    showRepos(username, repos);
+  } catch (err) {
+    alert(err.message);
+  }
 }
 
 function showRepos(username, repos) {
@@ -75,16 +78,34 @@ function showRepos(username, repos) {
         <span class="small"><i class="fas fa-star"></i> ${r.stargazers_count}</span>
         <button data-repo="${r.name}" data-owner="${username}"><i class="fas fa-chart-line"></i> Show Commits</button>
       </div>
+      <div class="chart-container hidden" data-chart="${r.name}">
+        <canvas id="commitChart-${r.name}"></canvas>
+      </div>
     </div>
   `).join('');
   reposEl.innerHTML = `<div class="repo-list">${list}</div>`;
   reposEl.querySelectorAll('button[data-repo]').forEach(btn => {
-    btn.addEventListener('click', async (e) => {
+    btn.addEventListener('click', async () => {
       const repo = btn.dataset.repo;
       const owner = btn.dataset.owner;
-      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
-      await buildCommitGraph(owner, repo);
-      btn.innerHTML = '<i class="fas fa-chart-line"></i> Show Commits';
+      const chartContainer = reposEl.querySelector(`.chart-container[data-chart="${repo}"]`);
+      const isHidden = chartContainer.classList.contains('hidden');
+      btn.innerHTML = isHidden ? '<i class="fas fa-spinner fa-spin"></i> Loading...' : '<i class="fas fa-chart-line"></i> Show Commits';
+      if (isHidden) {
+        try {
+          await buildCommitGraph(owner, repo, chartContainer.querySelector('canvas'));
+          btn.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Commits';
+          chartContainer.classList.remove('hidden');
+        } catch (err) {
+          btn.innerHTML = '<i class="fas fa-chart-line"></i> Show Commits';
+          alert(err.message);
+        }
+      } else {
+        chartContainer.classList.add('hidden');
+        const canvas = chartContainer.querySelector('canvas');
+        const chart = Chart.getChart(canvas);
+        if (chart) chart.destroy();
+      }
     });
   });
 }
@@ -92,37 +113,40 @@ function showRepos(username, repos) {
 function resetUI() {
   profileEl.classList.add('hidden');
   reposEl.classList.add('hidden');
-  commitGraphEl.classList.add('hidden');
   landingEl.classList.remove('hidden');
-  if (commitChart) {
-    commitChart.destroy();
-    commitChart = null;
-  }
+  reposEl.querySelectorAll('.chart-container').forEach(container => {
+    const canvas = container.querySelector('canvas');
+    const chart = Chart.getChart(canvas);
+    if (chart) chart.destroy();
+    container.classList.add('hidden');
+  });
 }
 
 async function fetchAllCommits(owner, repo) {
   const commits = [];
   let url = `https://api.github.com/repos/${owner}/${repo}/commits?per_page=100`;
-  while (url) {
-    const res = await fetch(url, { headers: headers() });
-    if (!res.ok) throw new Error('Failed to fetch commits (is the repo large or private?)');
-    const part = await res.json();
-    commits.push(...part);
-    const link = res.headers.get('link');
-    if (link) {
-      const nextMatch = link.match(/<([^>]+)>;\s*rel="next"/);
-      url = nextMatch ? nextMatch[1] : null;
-    } else {
-      url = null;
+  try {
+    while (url) {
+      const res = await fetch(url, { headers: headers() });
+      if (!res.ok) throw new Error('Failed to fetch commits (is the repo large or private?)');
+      const part = await res.json();
+      commits.push(...part);
+      const link = res.headers.get('link');
+      if (link) {
+        const nextMatch = link.match(/<([^>]+)>;\s*rel="next"/);
+        url = nextMatch ? nextMatch[1] : null;
+      } else {
+        url = null;
+      }
+      if (commits.length > 1000) break;
     }
-    if (commits.length > 1000) break;
+    return commits;
+  } catch (err) {
+    throw new Error(err.message);
   }
-  return commits;
 }
 
-async function buildCommitGraph(owner, repo) {
-  commitGraphEl.classList.remove('hidden');
-  commitGraphEl.querySelector('h3').textContent = `📈 Commits per Day: ${owner}/${repo}`;
+async function buildCommitGraph(owner, repo, canvas) {
   try {
     const commits = await fetchAllCommits(owner, repo);
     const counts = {};
@@ -132,16 +156,15 @@ async function buildCommitGraph(owner, repo) {
     });
     const keys = Object.keys(counts).sort();
     const values = keys.map(k => counts[k]);
-    if (commitChart) commitChart.destroy();
-    commitChart = new Chart(ctx, {
+    new Chart(canvas, {
       type: 'line',
       data: {
         labels: keys,
         datasets: [{
           label: 'Commits per Day',
           data: values,
-          borderColor: 'rgba(26, 115, 232, 0.8)',
-          backgroundColor: 'rgba(26, 115, 232, 0.1)',
+          borderColor: 'rgba(3, 102, 214, 0.8)',
+          backgroundColor: 'rgba(3, 102, 214, 0.1)',
           borderWidth: 2,
           fill: true,
           tension: 0.4,
@@ -160,16 +183,16 @@ async function buildCommitGraph(owner, repo) {
           y: {
             beginAtZero: true,
             ticks: { stepSize: 1 },
-            grid: { color: 'rgba(0, 0, 0, 0.1)' }
+            grid: { color: getComputedStyle(document.documentElement).getPropertyValue('--border') }
           }
         },
         plugins: {
           legend: { display: true, position: 'top' },
-          tooltip: { backgroundColor: 'rgba(0, 0, 0, 0.8)' }
+          tooltip: { backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--card') }
         }
       }
     });
   } catch (err) {
-    alert('Error fetching commits: ' + err.message);
+    throw new Error('Error fetching commits: ' + err.message);
   }
 }

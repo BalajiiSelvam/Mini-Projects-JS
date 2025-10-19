@@ -1,20 +1,16 @@
 particlesJS('particles-js', {
   particles: {
-    number: { value: 80, density: { enable: true, value_area: 800 } },
-    color: { value: '#58a6ff' },
-    shape: { type: 'circle' },
-    opacity: { value: 0.5, random: true },
-    size: { value: 3, random: true },
+    number: { value: 50, density: { enable: true, value_area: 1000 } },
+    color: { value: ['#0366d6', '#28a745', '#d73a49'] },
+    shape: { type: ['circle', 'triangle', 'star'], stroke: { width: 0 } },
+    opacity: { value: 0.6, random: true, anim: { enable: true, speed: 1, opacity_min: 0.2 } },
+    size: { value: 4, random: true, anim: { enable: true, speed: 2, size_min: 1 } },
     line_linked: {
-      enable: true,
-      distance: 150,
-      color: '#58a6ff',
-      opacity: 0.4,
-      width: 1
+      enable: false
     },
     move: {
       enable: true,
-      speed: 2,
+      speed: 3,
       direction: 'none',
       random: true,
       straight: false,
@@ -25,13 +21,13 @@ particlesJS('particles-js', {
   interactivity: {
     detect_on: 'canvas',
     events: {
-      onhover: { enable: true, mode: 'grab' },
-      onclick: { enable: true, mode: 'push' },
+      onhover: { enable: true, mode: 'bubble' },
+      onclick: { enable: true, mode: 'repulse' },
       resize: true
     },
     modes: {
-      grab: { distance: 140, line_linked: { opacity: 1 } },
-      push: { particles_nb: 4 }
+      bubble: { distance: 200, size: 6, duration: 2, opacity: 0.8 },
+      repulse: { distance: 100, duration: 0.4 }
     }
   },
   retina_detect: true

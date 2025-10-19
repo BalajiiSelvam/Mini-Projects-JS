@@ -1,26 +1,30 @@
 :root {
-  --bg: #f0f4f8;
+  --bg: #ffffff;
   --card: #ffffff;
-  --accent: #1a73e8;
-  --text: #1a1a1a;
-  --muted: #6b7280;
-  --shadow: rgba(0, 0, 0, 0.1);
+  --accent: #0366d6;
+  --text: #24292e;
+  --muted: #6a737d;
+  --shadow: rgba(27, 31, 35, 0.1);
+  --border: #e1e4e8;
+  --repo-bg: #f6f8fa;
 }
 
 body.dark {
-  --bg: #1a202c;
-  --card: #2d3748;
-  --accent: #63b3ed;
-  --text: #e2e8f0;
-  --muted: #a0aec0;
+  --bg: #0d1117;
+  --card: #161b22;
+  --accent: #79b8ff;
+  --text: #c9d1d9;
+  --muted: #8b949e;
   --shadow: rgba(0, 0, 0, 0.3);
+  --border: #30363d;
+  --repo-bg: #21262d;
 }
 
 body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   transition: background 0.4s ease, color 0.4s ease;
   overflow-x: hidden;
 }
@@ -34,6 +38,47 @@ body {
   z-index: -1;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.theme-toggle {
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 1.1rem;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px var(--shadow);
+}
+
+.theme-toggle span {
+  font-weight: 500;
+}
+
 .container {
   max-width: 1000px;
   margin: 40px auto;
@@ -42,50 +87,24 @@ body {
 
 .landing {
   text-align: center;
-  padding: 60px 20px;
+  padding: 80px 20px;
   animation: fadeIn 1s ease-in-out;
 }
 
 .landing-title {
-  font-size: 3.5rem;
-  color: var(--accent);
+  font-size: 2.8rem;
+  color: var(--text);
   margin: 0;
-  text-shadow: 0 2px 4px var(--shadow);
+  font-weight: 600;
 }
 
 .landing-subtitle {
-  font-size: 1.5rem;
-  color: var(--muted);
-  margin: 10px 0 30px;
-}
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-}
-
-h1 {
-  margin: 0;
-  font-size: 2.2rem;
-  color: var(--accent);
-}
-
-.theme-toggle {
-  background: var(--accent);
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
   font-size: 1.2rem;
-  color: #fff;
-  cursor: pointer;
-  transition: transform 0.3s, background 0.3s;
-}
-
-.theme-toggle:hover {
-  transform: scale(1.1);
+  color: var(--muted);
+  margin: 15px 0 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .search {
@@ -98,49 +117,53 @@ h1 {
 .search input {
   width: 100%;
   max-width: 500px;
-  padding: 14px 20px;
-  border-radius: 50px;
-  border: 2px solid var(--accent);
-  font-size: 1.1rem;
+  padding: 12px 20px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  font-size: 1rem;
   outline: none;
-  transition: box-shadow 0.3s, transform 0.3s;
+  transition: border-color 0.3s, box-shadow 0.3s;
   background: var(--card);
   color: var(--text);
 }
 
 .search input:focus {
-  box-shadow: 0 0 10px var(--accent);
-  transform: scale(1.02);
+  border-color: var(--accent);
+  box-shadow: 0 0 8px var(--shadow);
 }
 
 .search-btn {
-  padding: 14px 30px;
-  border-radius: 50px;
+  padding: 12px 24px;
+  border-radius: 6px;
   background: var(--accent);
   border: none;
   color: #fff;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .search-btn:hover {
+  background: #005cc5;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px var(--shadow);
 }
 
 .card {
   background: var(--card);
-  padding: 25px;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px var(--shadow);
+  padding: 20px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
   margin-bottom: 30px;
-  transition: background 0.4s, transform 0.3s;
+  transition: box-shadow 0.3s;
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  box-shadow: 0 4px 12px var(--shadow);
 }
 
 .hidden {
@@ -155,28 +178,29 @@ h1 {
 }
 
 .profile-box img {
-  border-radius: 12px;
+  border-radius: 6px;
   width: 100px;
   height: 100px;
-  border: 3px solid var(--accent);
+  border: 1px solid var(--border);
 }
 
 .profile-info h2 {
   margin: 0;
-  font-size: 1.8rem;
-  color: var(--accent);
+  font-size: 1.6rem;
+  color: var(--text);
 }
 
 .profile-info .bio {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: var(--muted);
   margin: 10px 0;
 }
 
 .profile-stats {
   display: flex;
-  gap: 30px;
-  font-size: 1rem;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 0.9rem;
   color: var(--text);
   margin-top: 15px;
 }
@@ -184,7 +208,7 @@ h1 {
 .profile-stats span {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .profile-stats i {
@@ -194,25 +218,19 @@ h1 {
 .repo-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 15px;
 }
 
 .repo {
-  background: var(--bg);
+  background: var(--repo-bg);
   padding: 15px;
-  border-radius: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: background 0.3s, transform 0.3s;
-}
-
-body.dark .repo {
-  background: var(--card);
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  transition: background 0.3s, box-shadow 0.3s;
 }
 
 .repo:hover {
-  transform: translateX(5px);
+  box-shadow: 0 2px 8px var(--shadow);
 }
 
 .repo a {
@@ -221,24 +239,42 @@ body.dark .repo {
   font-weight: 600;
 }
 
+.repo a:hover {
+  text-decoration: underline;
+}
+
 .repo button {
   padding: 8px 16px;
-  border-radius: 8px;
+  border-radius: 6px;
   background: var(--accent);
   border: none;
   color: #fff;
+  font-weight: 600;
   cursor: pointer;
-  transition: transform 0.3s;
+  transition: background 0.3s, transform 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .repo button:hover {
-  transform: scale(1.05);
+  background: #005cc5;
+  transform: translateY(-1px);
 }
 
 .chart-container {
   position: relative;
-  height: 300px;
+  height: 250px;
   width: 100%;
+  margin-top: 15px;
+}
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  border-top: 1px solid var(--border);
 }
 
 @keyframes fadeIn {
