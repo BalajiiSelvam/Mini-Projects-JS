@@ -1,0 +1,16 @@
+:root{
+  --bg:#f6f8fa; --card:#fff; --accent:#0366d6; --muted:#586069;
+  font-family:system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+body{background:var(--bg); margin:0; padding:20px; color:#111}
+.app{max-width:900px; margin:0 auto}
+h1{color:var(--accent)}
+.search{display:flex; gap:8px; margin-bottom:16px}
+input#username{flex:1; padding:10px; font-size:16px}
+button{padding:10px 14px; background:var(--accent); color:white; border:0; cursor:pointer}
+.card{background:var(--card); padding:16px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.06); margin-bottom:16px}
+.hidden{display:none}
+.repo-list{display:flex; flex-direction:column; gap:8px}
+.repo{display:flex; justify-content:space-between; align-items:center; padding:8px; border-radius:6px; background:#fafafa}
+.repo a{color:var(--accent); text-decoration:none}
+.small{color:var(--muted); font-size:14px}
