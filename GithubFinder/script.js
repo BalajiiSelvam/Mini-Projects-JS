@@ -3,6 +3,7 @@ const usernameInput = document.getElementById('username');
 const profileEl = document.getElementById('profile');
 const reposEl = document.getElementById('repos');
 const landingEl = document.getElementById('landing');
+const backBtn = document.getElementById('backBtn');
 const token = '';
 
 function headers() {
@@ -18,6 +19,10 @@ searchBtn.addEventListener('click', () => {
   fetchUser(username);
 });
 
+backBtn.addEventListener('click', () => {
+  resetUI();
+});
+
 async function fetchUser(username) {
   resetUI();
   try {
@@ -27,6 +32,7 @@ async function fetchUser(username) {
     showProfile(user);
     await fetchRepos(username);
     landingEl.classList.add('hidden');
+    backBtn.classList.remove('hidden');
   } catch (err) {
     alert(err.message);
   }
@@ -44,7 +50,6 @@ function showProfile(user) {
           <span><i class="fas fa-users"></i> Followers: ${user.followers}</span>
           <span><i class="fas fa-user-friends"></i> Following: ${user.following}</span>
           <span><i class="fas fa-code"></i> Public Repos: ${user.public_repos}</span>
-          <span><i class="fas fa-map-marker-alt"></i> Location: ${user.location || '—'}</span>
         </div>
       </div>
     </div>
@@ -65,7 +70,7 @@ async function fetchRepos(username) {
 function showRepos(username, repos) {
   reposEl.classList.remove('hidden');
   if (!Array.isArray(repos) || repos.length === 0) {
-    reposEl.innerHTML = `<div class="card">No public repos</div>`;
+    reposEl.innerHTML = `<div class="card glassy">No public repos</div>`;
     return;
   }
   const list = repos.map(r => `
@@ -76,7 +81,7 @@ function showRepos(username, repos) {
       </div>
       <div style="display:flex;gap:8px;align-items:center">
         <span class="small"><i class="fas fa-star"></i> ${r.stargazers_count}</span>
-        <button data-repo="${r.name}" data-owner="${username}"><i class="fas fa-chart-line"></i> Show Commits</button>
+        <button data-repo="${r.name}" data-owner="${username}"><i class="fas fa-chart-line"></i></button>
       </div>
       <div class="chart-container hidden" data-chart="${r.name}">
         <canvas id="commitChart-${r.name}"></canvas>
@@ -90,14 +95,14 @@ function showRepos(username, repos) {
       const owner = btn.dataset.owner;
       const chartContainer = reposEl.querySelector(`.chart-container[data-chart="${repo}"]`);
       const isHidden = chartContainer.classList.contains('hidden');
-      btn.innerHTML = isHidden ? '<i class="fas fa-spinner fa-spin"></i> Loading...' : '<i class="fas fa-chart-line"></i> Show Commits';
+      btn.innerHTML = isHidden ? '<i class="fas fa-spinner fa-spin"></i>' : '<i class="fas fa-chart-line"></i>';
       if (isHidden) {
         try {
           await buildCommitGraph(owner, repo, chartContainer.querySelector('canvas'));
-          btn.innerHTML = '<i class="fas fa-eye-slash"></i> Hide Commits';
+          btn.innerHTML = '<i class="fas fa-eye-slash"></i>';
           chartContainer.classList.remove('hidden');
         } catch (err) {
-          btn.innerHTML = '<i class="fas fa-chart-line"></i> Show Commits';
+          btn.innerHTML = '<i class="fas fa-chart-line"></i>';
           alert(err.message);
         }
       } else {
@@ -108,12 +113,16 @@ function showRepos(username, repos) {
       }
     });
   });
+
+  // Initialize typing effect
+  initTypingEffect();
 }
 
 function resetUI() {
   profileEl.classList.add('hidden');
   reposEl.classList.add('hidden');
   landingEl.classList.remove('hidden');
+  backBtn.classList.add('hidden');
   reposEl.querySelectorAll('.chart-container').forEach(container => {
     const canvas = container.querySelector('canvas');
     const chart = Chart.getChart(canvas);
@@ -163,13 +172,13 @@ async function buildCommitGraph(owner, repo, canvas) {
         datasets: [{
           label: 'Commits per Day',
           data: values,
-          borderColor: 'rgba(3, 102, 214, 0.8)',
-          backgroundColor: 'rgba(3, 102, 214, 0.1)',
+          borderColor: getComputedStyle(document.documentElement).getPropertyValue('--accent'),
+          backgroundColor: getComputedStyle(document.documentElement).getPropertyValue('--accent') + '33',
           borderWidth: 2,
           fill: true,
           tension: 0.4,
           pointRadius: 3,
-          pointHoverRadius: 6
+          pointHoverRadius: 5
         }]
       },
       options: {
@@ -195,4 +204,48 @@ async function buildCommitGraph(owner, repo, canvas) {
   } catch (err) {
     throw new Error('Error fetching commits: ' + err.message);
   }
+}
+
+function initTypingEffect() {
+  const phrases = [
+    'Find any account instantly ⊹˚',
+    'Explore projects easily ˚⋆⊹',
+    'Track recent commits .✦',
+    'Discover GitHub profiles ₊˚⊹'
+  ];
+  let currentPhrase = 0;
+  let isDeleting = false;
+  let text = '';
+  const typingSpeed = 80;
+  const deletingSpeed = 40;
+  const pauseTime = 1200;
+
+  function type() {
+    const typingText = document.getElementById('typing-text');
+    const fullText = phrases[currentPhrase];
+
+    if (!isDeleting) {
+      text = fullText.substring(0, text.length + 1);
+    } else {
+      text = fullText.substring(0, text.length - 1);
+    }
+
+    typingText.textContent = text;
+    typingText.style.borderRight = '2px solid var(--accent)';
+
+    let delay = isDeleting ? deletingSpeed : typingSpeed;
+
+    if (!isDeleting && text === fullText) {
+      delay = pauseTime;
+      isDeleting = true;
+    } else if (isDeleting && text === '') {
+      isDeleting = false;
+      currentPhrase = (currentPhrase + 1) % phrases.length;
+      delay = 400;
+    }
+
+    setTimeout(type, delay);
+  }
+
+  type();
 }

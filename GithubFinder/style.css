@@ -1,23 +1,27 @@
 :root {
   --bg: #ffffff;
-  --card: #ffffff;
-  --accent: #0366d6;
+  --card: #ffffffcc;
+  --accent: #2ea043;
   --text: #24292e;
   --muted: #6a737d;
   --shadow: rgba(27, 31, 35, 0.1);
   --border: #e1e4e8;
-  --repo-bg: #f6f8fa;
+  --repo-bg: #f6f8facc;
+  --glass-bg: rgba(255, 255, 255, 0.2);
+  --glass-blur: blur(8px);
 }
 
-body.dark {
+body[data-theme="dark"] {
   --bg: #0d1117;
-  --card: #161b22;
-  --accent: #79b8ff;
+  --card: #161b22cc;
+  --accent: #3fb950;
   --text: #c9d1d9;
   --muted: #8b949e;
   --shadow: rgba(0, 0, 0, 0.3);
   --border: #30363d;
-  --repo-bg: #21262d;
+  --repo-bg: #21262dcc;
+  --glass-bg: rgba(22, 27, 34, 0.2);
+  --glass-blur: blur(8px);
 }
 
 body {
@@ -42,8 +46,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 40px;
-  background: var(--card);
+  padding: 12px 40px;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
@@ -51,110 +56,121 @@ body {
 }
 
 .logo {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 600;
   color: var(--accent);
 }
 
-.theme-toggle {
-  background: var(--accent);
-  border: none;
-  border-radius: 8px;
-  padding: 10px 14px;
-  font-size: 1.1rem;
-  color: #fff;
-  cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
+.header-buttons {
   display: flex;
-  align-items: center;
   gap: 8px;
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px var(--shadow);
+.theme-toggle, .back-btn {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
 }
 
-.theme-toggle span {
-  font-weight: 500;
+.theme-toggle:hover, .back-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  box-shadow: 0 2px 6px var(--shadow);
 }
 
 .container {
-  max-width: 1000px;
+  max-width: 900px;
   margin: 40px auto;
   padding: 20px;
 }
 
 .landing {
   text-align: center;
-  padding: 80px 20px;
+  padding: 60px 20px;
   animation: fadeIn 1s ease-in-out;
 }
 
 .landing-title {
-  font-size: 2.8rem;
+  font-size: 2.5rem;
   color: var(--text);
   margin: 0;
   font-weight: 600;
 }
 
 .landing-subtitle {
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: var(--muted);
-  margin: 15px 0 40px;
+  margin: 15px 0 30px;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+  line-height: 1.6;
+}
+
+.typing-effect {
+  font-size: 1.1rem;
+  color: var(--accent);
+  margin-bottom: 25px;
+  height: 1.5em;
 }
 
 .search {
   display: flex;
   justify-content: center;
-  gap: 15px;
-  margin: 30px 0;
+  gap: 8px;
+  margin: 20px 0;
 }
 
 .search input {
   width: 100%;
-  max-width: 500px;
-  padding: 12px 20px;
+  max-width: 360px;
+  padding: 8px 14px;
   border-radius: 6px;
   border: 1px solid var(--border);
-  font-size: 1rem;
+  font-size: 0.9rem;
   outline: none;
   transition: border-color 0.3s, box-shadow 0.3s;
-  background: var(--card);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
   color: var(--text);
 }
 
 .search input:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 8px var(--shadow);
+  box-shadow: 0 0 6px var(--shadow);
 }
 
 .search-btn {
-  padding: 12px 24px;
+  padding: 8px 12px;
   border-radius: 6px;
   background: var(--accent);
   border: none;
   color: #fff;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
 }
 
 .search-btn:hover {
-  background: #005cc5;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px var(--shadow);
+  background: #2a8f3a;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px var(--shadow);
 }
 
 .card {
   background: var(--card);
+  backdrop-filter: var(--glass-blur);
   padding: 20px;
   border-radius: 6px;
   border: 1px solid var(--border);
@@ -163,52 +179,58 @@ body {
 }
 
 .card:hover {
-  box-shadow: 0 4px 12px var(--shadow);
+  box-shadow: 0 4px 10px var(--shadow);
 }
 
 .hidden {
   display: none;
 }
 
+.glassy {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border);
+}
+
 .profile-box {
   display: grid;
-  grid-template-columns: 100px 1fr;
-  gap: 20px;
+  grid-template-columns: 90px 1fr;
+  gap: 15px;
   align-items: center;
 }
 
 .profile-box img {
   border-radius: 6px;
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   border: 1px solid var(--border);
 }
 
 .profile-info h2 {
   margin: 0;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   color: var(--text);
 }
 
 .profile-info .bio {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--muted);
-  margin: 10px 0;
+  margin: 8px 0;
 }
 
 .profile-stats {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  font-size: 0.9rem;
+  gap: 15px;
+  font-size: 0.85rem;
   color: var(--text);
-  margin-top: 15px;
+  margin-top: 12px;
 }
 
 .profile-stats span {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
 }
 
 .profile-stats i {
@@ -218,19 +240,20 @@ body {
 .repo-list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px;
 }
 
 .repo {
   background: var(--repo-bg);
-  padding: 15px;
+  backdrop-filter: var(--glass-blur);
+  padding: 12px;
   border-radius: 6px;
   border: 1px solid var(--border);
   transition: background 0.3s, box-shadow 0.3s;
 }
 
 .repo:hover {
-  box-shadow: 0 2px 8px var(--shadow);
+  box-shadow: 0 2px 6px var(--shadow);
 }
 
 .repo a {
@@ -244,40 +267,50 @@ body {
 }
 
 .repo button {
-  padding: 8px 16px;
+  padding: 5px 10px;
   border-radius: 6px;
   background: var(--accent);
   border: none;
   color: #fff;
+  font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.3s, transform 0.3s;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
 
 .repo button:hover {
-  background: #005cc5;
+  background: #2a8f3a;
   transform: translateY(-1px);
 }
 
 .chart-container {
   position: relative;
-  height: 250px;
+  height: 220px;
   width: 100%;
-  margin-top: 15px;
+  margin-top: 12px;
 }
 
 .footer {
   text-align: center;
-  padding: 20px;
+  padding: 15px;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   border-top: 1px solid var(--border);
 }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  50% { border-color: transparent; }
 }

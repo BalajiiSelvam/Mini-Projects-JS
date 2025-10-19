@@ -9,31 +9,39 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 </head>
-<body>
+<body data-theme="light">
   <!-- Particle Background -->
   <div id="particles-js"></div>
 
   <header class="header">
     <div class="logo">GitHub Finder</div>
-    <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
+    <div class="header-buttons">
+      <button id="backBtn" class="back-btn hidden"><i class="fas fa-arrow-left"></i></button>
+      <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
+    </div>
   </header>
 
   <div class="container">
     <!-- Landing Page -->
-    <section id="landing" class="landing">
+    <section id="landing" class="landing glassy">
       <h1 class="landing-title">Welcome to GitHub Finder</h1>
-      <p class="landing-subtitle">Explore GitHub profiles and repositories with ease and style.</p>
+      <p class="landing-subtitle">
+            Discover GitHub profiles instantly and explore user stats, repositories, and activity all in one place. Effortlessly track recent commits and contributions to stay updated with developer progress. Enjoy a sleek, modern, and interactive experience designed for smooth navigation and insight.
+      </p>
+      <div class="typing-effect">
+        <span id="typing-text"></span>
+      </div>
       <div class="search">
         <input id="username" placeholder="Enter GitHub username (e.g., octocat)" />
-        <button id="searchBtn" class="search-btn"><i class="fas fa-search"></i> Find Profile</button>
+        <button id="searchBtn" class="search-btn"><i class="fas fa-search"></i></button>
       </div>
     </section>
 
-    <section id="profile" class="card hidden"></section>
-    <section id="repos" class="card hidden"></section>
+    <section id="profile" class="card glassy hidden"></section>
+    <section id="repos" class="card glassy hidden"></section>
   </div>
 
-  <footer class="footer">
+  <footer class="footer glassy">
     <p>© 2025 GitHub Finder</p>
   </footer>
 
