@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>GitHub Finder ✨</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
 </head>
@@ -13,25 +14,33 @@
   <div id="particles-js"></div>
 
   <div class="container">
+    <!-- Landing Page -->
+    <section id="landing" class="landing">
+      <h1 class="landing-title">🌟 GitHub Explorer</h1>
+      <p class="landing-subtitle">Discover GitHub profiles with a touch of magic!</p>
+      <div class="search">
+        <input id="username" placeholder="Enter GitHub username (e.g., octocat)" />
+        <button id="searchBtn" class="search-btn"><i class="fas fa-search"></i> Explore</button>
+      </div>
+    </section>
+
     <header>
       <h1>🌐 GitHub Finder</h1>
-      <button id="themeToggle">🌙</button>
+      <button id="themeToggle" class="theme-toggle"><i class="fas fa-moon"></i></button>
     </header>
-
-    <section class="search">
-      <input id="username" placeholder="Enter GitHub username (e.g. octocat)" />
-      <button id="searchBtn">🔍 Search</button>
-    </section>
 
     <section id="profile" class="card hidden"></section>
     <section id="repos" class="card hidden"></section>
 
     <section id="commitGraph" class="card hidden">
-      <h3>📈 Commits per day</h3>
-      <canvas id="commitChart"></canvas>
+      <h3>📈 Commits per Day</h3>
+      <div class="chart-container">
+        <canvas id="commitChart"></canvas>
+      </div>
     </section>
   </div>
 
+  <script src="particle.js"></script>
   <script src="script.js"></script>
   <script src="theme.js"></script>
 </body>
