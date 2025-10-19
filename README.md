@@ -12,7 +12,7 @@ A sleek and interactive web app to **discover GitHub profiles instantly**, explo
 
 ## 🌐 Demo
 
-You can add your live demo link here:  https://github-finder-one-rho.vercel.app
+Visit here:  https://github-finder-one-rho.vercel.app
 
 ---
 
