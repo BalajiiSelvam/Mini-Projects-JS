@@ -9,6 +9,7 @@
   --repo-bg: #f6f8facc;
   --glass-bg: rgba(255, 255, 255, 0.2);
   --glass-blur: blur(8px);
+  --footer-bg: #e6f4ea;
 }
 
 body[data-theme="dark"] {
@@ -22,6 +23,7 @@ body[data-theme="dark"] {
   --repo-bg: #21262dcc;
   --glass-bg: rgba(22, 27, 34, 0.2);
   --glass-blur: blur(8px);
+  --footer-bg: #1a3c21;
 }
 
 body {
@@ -30,16 +32,9 @@ body {
   color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   transition: background 0.4s ease, color 0.4s ease;
-  overflow-x: hidden;
-}
-
-#particles-js {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .header {
@@ -71,11 +66,11 @@ body {
   backdrop-filter: var(--glass-blur);
   border: 1px solid var(--border);
   border-radius: 6px;
-  padding: 6px 10px;
-  font-size: 0.85rem;
+  padding: 5px 8px;
+  font-size: 0.8rem;
   color: var(--text);
   cursor: pointer;
-  transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+  transition: background 0.5s ease, color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
 }
 
 .theme-toggle:hover, .back-btn:hover {
@@ -89,6 +84,7 @@ body {
   max-width: 900px;
   margin: 40px auto;
   padding: 20px;
+  flex: 1;
 }
 
 .landing {
@@ -136,9 +132,8 @@ body {
   border: 1px solid var(--border);
   font-size: 0.9rem;
   outline: none;
-  transition: border-color 0.3s, box-shadow 0.3s;
-  background: var(--glass-bg);
-  backdrop-filter: var(--glass-blur);
+  transition: border-color 0.5s ease, box-shadow 0.5s ease;
+  background: var(--card);
   color: var(--text);
 }
 
@@ -148,15 +143,15 @@ body {
 }
 
 .search-btn {
-  padding: 8px 12px;
+  padding: 6px 10px;
   border-radius: 6px;
   background: var(--accent);
   border: none;
   color: #fff;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  transition: background 0.5s ease, box-shadow 0.5s ease;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -164,7 +159,6 @@ body {
 
 .search-btn:hover {
   background: #2a8f3a;
-  transform: translateY(-1px);
   box-shadow: 0 2px 6px var(--shadow);
 }
 
@@ -175,7 +169,7 @@ body {
   border-radius: 6px;
   border: 1px solid var(--border);
   margin-bottom: 30px;
-  transition: box-shadow 0.3s;
+  transition: box-shadow 0.5s ease;
 }
 
 .card:hover {
@@ -249,7 +243,9 @@ body {
   padding: 12px;
   border-radius: 6px;
   border: 1px solid var(--border);
-  transition: background 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .repo:hover {
@@ -266,16 +262,22 @@ body {
   text-decoration: underline;
 }
 
+.repo .repo-details {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .repo button {
-  padding: 5px 10px;
+  padding: 4px 8px;
   border-radius: 6px;
   background: var(--accent);
   border: none;
   color: #fff;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s, transform 0.3s;
+  transition: background 0.5s ease, box-shadow 0.5s ease;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -283,14 +285,13 @@ body {
 
 .repo button:hover {
   background: #2a8f3a;
-  transform: translateY(-1px);
+  box-shadow: 0 2px 6px var(--shadow);
 }
 
 .chart-container {
   position: relative;
   height: 220px;
   width: 100%;
-  margin-top: 12px;
 }
 
 .footer {
@@ -298,7 +299,9 @@ body {
   padding: 15px;
   color: var(--muted);
   font-size: 0.85rem;
+  background: var(--footer-bg);
   border-top: 1px solid var(--border);
+  margin-top: auto;
 }
 
 @keyframes fadeIn {

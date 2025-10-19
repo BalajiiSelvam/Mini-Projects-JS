@@ -75,11 +75,8 @@ function showRepos(username, repos) {
   }
   const list = repos.map(r => `
     <div class="repo">
-      <div>
-        <a href="${r.html_url}" target="_blank">${r.name}</a>
-        <div class="small">${r.description || 'No description'}</div>
-      </div>
-      <div style="display:flex;gap:8px;align-items:center">
+      <a href="${r.html_url}" target="_blank">${r.name}</a>
+      <div class="repo-details">
         <span class="small"><i class="fas fa-star"></i> ${r.stargazers_count}</span>
         <button data-repo="${r.name}" data-owner="${username}"><i class="fas fa-chart-line"></i></button>
       </div>
@@ -208,10 +205,10 @@ async function buildCommitGraph(owner, repo, canvas) {
 
 function initTypingEffect() {
   const phrases = [
-    'Find any account instantly ⊹˚',
-    'Explore projects easily ˚⋆⊹',
-    'Track recent commits .✦',
-    'Discover GitHub profiles ₊˚⊹'
+    'Find any account instantly',
+    'Explore projects easily',
+    'Track recent commits',
+    'Discover GitHub profiles'
   ];
   let currentPhrase = 0;
   let isDeleting = false;
