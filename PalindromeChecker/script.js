@@ -1,5 +1,5 @@
 function checkPalindrome() {
-  const actualinput = document.getElementById("inputText");
+  const actualinput = document.getElementById("inputText").value;
   const input = document.getElementById("inputText").value.trim().toLowerCase();
   const result = document.getElementById("result");
 
