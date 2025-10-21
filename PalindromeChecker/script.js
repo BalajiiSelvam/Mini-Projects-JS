@@ -1,4 +1,5 @@
 function checkPalindrome() {
+  const actualinput = document.getElementById("inputText");
   const input = document.getElementById("inputText").value.trim().toLowerCase();
   const result = document.getElementById("result");
 
@@ -13,10 +14,10 @@ function checkPalindrome() {
   const reversed = cleaned.split("").reverse().join("");
 
   if (cleaned === reversed) {
-    result.textContent = `✅ "${input}" is a Palindrome!`;
+    result.textContent = `✅ "${actualinput}" is a Palindrome!`;
     result.className = "result success";
   } else {
-    result.textContent = `❌ "${input}" is not a Palindrome.`;
+    result.textContent = `❌ "${actualinput}" is not a Palindrome.`;
     result.className = "result error";
   }
 }
