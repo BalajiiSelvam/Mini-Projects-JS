@@ -12,6 +12,7 @@ h1 {
   margin-bottom: 20px;
 }
 
+/* Input Section */
 .input-section {
   background: white;
   padding: 20px;
@@ -44,27 +45,60 @@ button:hover {
   background: #6c72e4;
 }
 
+/* ID Card */
 .id-card {
   display: none;
   background: white;
-  width: 300px;
-  border-radius: 15px;
-  padding: 20px;
+  width: 340px;
+  border-radius: 20px;
   text-align: center;
   box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  padding-bottom: 15px;
+  border: 2px solid black;
+}
+
+/* Header (Logo + College Name) */
+.card-header {
+  padding: 10px 15px;
+  border-bottom: 1px solid #ccc;
 }
 
 .college-logo {
-  width: 80px;
-  margin-bottom: 10px;
+  width: 70px;
+  display: block;
+  margin: 0 auto 5px;
+}
+
+.college-name {
+  font-size: 18px;
+  color: #e67e22;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.college-name span {
+  color: #333;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.college-sub {
+  font-size: 10px;
+  color: #555;
+}
+
+/* Body (Profile + Details) */
+.card-body {
+  margin-top: 10px;
 }
 
 .profile-img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
   object-fit: cover;
-  border: 3px solid #4e54c8;
+  border: 2px solid #4e54c8;
+  background: #d7e4ff;
 }
 
 .id-details {
@@ -73,10 +107,13 @@ button:hover {
 
 .id-details h2 {
   margin: 5px 0;
-  color: #333;
+  color: #000;
+  font-family: 'Comic Sans MS', cursive;
 }
 
 .id-details p {
-  margin: 4px 0;
-  color: #555;
+  margin: 3px 0;
+  color: #000;
+  font-family: 'Comic Sans MS', cursive;
+  font-size: 14px;
 }
