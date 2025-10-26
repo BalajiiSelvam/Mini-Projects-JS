@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ID Card Generator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>ID Card Generator</h1>
+
+  <div class="input-section">
+    <input type="text" id="name" placeholder="Enter your Name" required>
+    <input type="text" id="dept" placeholder="Enter your Department" required>
+    <input type="text" id="roll" placeholder="Enter Roll Number" required>
+    <input type="date" id="dob" required>
+    <input type="file" id="image" accept="image/*" required>
+    <button onclick="generateCard()">Generate ID Card</button>
+  </div>
+
+  <div class="id-card" id="idCard">
+    <img src="https://upload.wikimedia.org/wikipedia/en/d/d8/Anna_University_Logo.svg" alt="College Logo" class="college-logo">
+    <img id="profilePic" class="profile-img" alt="Profile Image">
+    <div class="id-details">
+      <h2 id="displayName"></h2>
+      <p id="displayDept"></p>
+      <p id="displayRoll"></p>
+      <p id="displayDOB"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

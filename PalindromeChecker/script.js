@@ -11,7 +11,7 @@ function checkPalindrome() {
 
   // Remove non-alphanumeric chars
   const cleaned = input.replace(/[^a-z0-9]/g, '');
-  const reversed = cleaned.split("").reverse().join("");
+  const reversed = cleaned.split("").reverse().join("")
 
   if (cleaned === reversed) {
     result.textContent = `✅ "${actualinput}" is a Palindrome!`;
