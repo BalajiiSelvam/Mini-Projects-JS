@@ -1,24 +1,28 @@
 function generateCard() {
-  const name = document.getElementById('name').value;
-  const dept = document.getElementById('dept').value;
-  const roll = document.getElementById('roll').value;
-  const dob = document.getElementById('dob').value;
-  const imageInput = document.getElementById('image');
+  const name = document.getElementById("name").value.trim();
+  const dept = document.getElementById("dept").value.trim();
+  const roll = document.getElementById("roll").value.trim();
+  const dob = document.getElementById("dob").value;
+  const image = document.getElementById("image").files[0];
+  const idCard = document.getElementById("idCard");
 
-  if (!name || !dept || !roll || !dob || !imageInput.files[0]) {
-    alert("Please fill all details!");
+  if (!name || !dept || !roll || !dob || !image) {
+    alert("Please fill all fields!");
     return;
   }
 
+  // Update text fields
+  document.getElementById("displayName").textContent = name;
+  document.getElementById("displayRoll").textContent = roll;
+  document.getElementById("displayDept").textContent = dept;
+
+  // Load image
   const reader = new FileReader();
-  reader.onload = function(e) {
-    document.getElementById('profilePic').src = e.target.result;
+  reader.onload = function (e) {
+    document.getElementById("profilePic").src = e.target.result;
   };
-  reader.readAsDataURL(imageInput.files[0]);
+  reader.readAsDataURL(image);
 
-  document.getElementById('displayName').textContent = name;
-  document.getElementById('displayDept').textContent = dept;
-  document.getElementById('displayRoll').textContent = "Roll No: " + roll;
-
-  document.getElementById('idCard').style.display = 'block';
+  // Show card
+  idCard.classList.remove("hidden");
 }
