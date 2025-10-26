@@ -10,27 +10,32 @@
 
   <h1>ID Card Generator</h1>
 
-  <div class="input-section">
-    <input type="text" id="name" placeholder="Enter your Name" required>
-    <input type="text" id="dept" placeholder="Enter your Department" required>
-    <input type="text" id="roll" placeholder="Enter Roll Number" required>
-    <input type="date" id="dob" required>
-    <input type="file" id="image" accept="image/*" required>
-    <button onclick="generateCard()">Generate ID Card</button>
-  </div>
-
-  <div class="id-card" id="idCard">
-    <div class="card-header">
-      <img src="logobit.png" alt="College Logo" class="college-logo">
-      <h2 class="college-name">BANNARI AMMAN<br><span>INSTITUTE OF TECHNOLOGY</span></h2>
-      <p class="college-sub">Autonomous Institution, Accredited by NAAC With ‘A’ Grade</p>
+  <div class="container">
+    <!-- Form Section -->
+    <div class="input-section">
+      <input type="text" id="name" placeholder="Enter your Name" required>
+      <input type="text" id="dept" placeholder="Enter your Department" required>
+      <input type="text" id="roll" placeholder="Enter Roll Number" required>
+      <input type="date" id="dob" required>
+      <input type="file" id="image" accept="image/*" required>
+      <button onclick="generateCard()">Generate ID Card</button>
     </div>
 
-    <div class="card-body">
-      <img id="profilePic" class="profile-img" alt="Profile Image">
-      <div class="id-details">
-        <h2 id="displayName"></h2>
-        <p id="displayRoll"></p>
+    <!-- Card Section -->
+    <div class="id-card hidden" id="idCard">
+      <div class="card-header">
+        <img src="logobit.png" alt="College Logo" class="college-logo">
+      </div>
+
+      <div class="card-body">
+        <img id="profilePic" class="profile-img" alt="Profile Image">
+        <div class="id-details">
+          <h2 id="displayName"></h2>
+          <p id="displayRoll"></p>
+        </div>
+      </div>
+
+      <div class="card-footer">
         <p id="displayDept"></p>
       </div>
     </div>
