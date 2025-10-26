@@ -1,0 +1,82 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #4e54c8, #8f94fb);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+}
+
+h1 {
+  color: white;
+  margin-bottom: 20px;
+}
+
+.input-section {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  width: 320px;
+  margin-bottom: 30px;
+}
+
+.input-section input {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+button {
+  width: 100%;
+  background: #4e54c8;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background: #6c72e4;
+}
+
+.id-card {
+  display: none;
+  background: white;
+  width: 300px;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.college-logo {
+  width: 80px;
+  margin-bottom: 10px;
+}
+
+.profile-img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #4e54c8;
+}
+
+.id-details {
+  margin-top: 15px;
+}
+
+.id-details h2 {
+  margin: 5px 0;
+  color: #333;
+}
+
+.id-details p {
+  margin: 4px 0;
+  color: #555;
+}
