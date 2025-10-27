@@ -2,22 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>LeetCode Profile Finder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LeetCode Account Finder</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
-    <h1>LeetCode Profile Finder</h1>
-    <p class="subtitle">Search any LeetCode user instantly</p>
+    <h1>🔍 LeetCode Account Finder</h1>
+    <input type="text" id="username" placeholder="Enter LeetCode username" />
+    <button onclick="searchUser()">Search</button>
 
-    <div class="search-box">
-      <input type="text" id="username" placeholder="e.g. leetcode, lee215" autocomplete="off" />
-      <button id="searchBtn">Search</button>
-    </div>
-
-    <div id="result" class="result-box"></div>
+    <div id="result"></div>
   </div>
 
   <script src="script.js"></script>
