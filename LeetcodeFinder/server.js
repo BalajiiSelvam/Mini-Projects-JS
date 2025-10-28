@@ -1,37 +1,54 @@
-// Import packages
 import express from "express";
-import fetch from "node-fetch";
 import cors from "cors";
+import fetch from "node-fetch";
 
 const app = express();
 const PORT = 5000;
 
-// Enable CORS
 app.use(cors());
+app.use(express.static("public"));
 
-// LeetCode API route
 app.get("/leetcode/:username", async (req, res) => {
-  try {
-    const username = req.params.username;
-    console.log(`Fetching LeetCode data for: ${username}`);
+  const { username } = req.params;
 
-    const response = await fetch(`https://leetcode-api-faisalshohag.vercel.app/${username}`);
+  if (!username || !/^[a-zA-Z0-9_-]+$/.test(username)) {
+    return res.status(400).json({ error: "Invalid username" });
+  }
+
+  try {
+    const apiUrl = `https://leetcode-api-faisalshohag.vercel.app/${username}`;
+    console.log("Fetching:", apiUrl);
+
+    const response = await fetch(apiUrl);
 
     if (!response.ok) {
-      throw new Error("Failed to fetch data from LeetCode API");
+      if (response.status === 404) {
+        return res.status(404).json({ error: "User not found" });
+      }
+      throw new Error(`API error: ${response.status}`);
     }
 
     const data = await response.json();
 
-    // Send response to frontend
-    res.json(data);
-  } catch (error) {
-    console.error("Error fetching LeetCode data:", error.message);
-    res.status(500).json({ error: "Internal Server Error", details: error.message });
+    const result = {
+      name: data.realName || username,
+      ranking: data.ranking || "N/A",
+      totalSolved: data.totalSolved || 0,
+      easySolved: data.easySolved || 0,
+      mediumSolved: data.mediumSolved || 0,
+      hardSolved: data.hardSolved || 0,
+      totalEasy: data.totalEasy || 300,
+      totalMedium: data.totalMedium || 800,
+      totalHard: data.totalHard || 400,
+    };
+
+    res.json(result);
+  } catch (err) {
+    console.error("Error:", err.message);
+    res.status(500).json({ error: "Failed to fetch data" });
   }
 });
 
-// Start server
 app.listen(PORT, () => {
-  console.log(`✅ Server running at http://localhost:${PORT}`);
+  console.log(`Server running at http://localhost:${PORT}`);
 });
