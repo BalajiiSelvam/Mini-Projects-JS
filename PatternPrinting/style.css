@@ -127,3 +127,93 @@ pre {
   border-color: #fff;
   box-shadow: 0 0 0 3px #fff;
 }
+
+/* ==== NEW: side-by-side result boxes ==== */
+.result-wrapper {
+  display: flex;
+  gap: 20px;
+  margin-top: 25px;
+  justify-content: center;
+}
+.result-box {
+  flex: 1;
+  background: #000;
+  border-radius: 10px;
+  padding: 12px;
+  max-width: 48%;
+  border-left: 4px solid #22d3ee;
+  box-shadow: inset 0 0 10px rgba(34,211,238,.3);
+}
+.result-box h3 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: #facc15;
+}
+.result-box pre {
+  margin: 0;
+  font-family: "Courier New", monospace;
+  font-size: 16px;
+  line-height: 1.4;
+  white-space: pre;
+  overflow-x: auto;
+}
+/* ==== CODE BLOCK – LEFT-ALIGNED & REAL CODE LOOK ==== */
+#codeOutput {
+  text-align: left !important;     /* Force left alignment */
+  font-family: "Courier New", Consolas, monospace !important;
+  background: #111;
+  color: #c9d1d9;
+  padding: 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  white-space: pre;                /* Critical: preserves spaces */
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+#codeOutput code {
+  display: block;
+  white-space: pre;                /* Keep all spaces and tabs */
+  tab-size: 2;                     /* 2-space tabs */
+  -moz-tab-size: 2;
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  background: #1e293b;
+  padding: 30px 45px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  width: 900px;           /* WIDER */
+  max-width: 95vw;
+}
+
+/* ==== SIDE-BY-SIDE RESULT BOXES ==== */
+.result-wrapper {
+  display: flex;
+  gap: 30px;
+  margin-top: 30px;
+  justify-content: center;
+}
+
+.result-box {
+  flex: 1;
+  background: #000;
+  border-radius: 12px;
+  padding: 16px;
+  border-left: 4px solid #22d3ee;
+  box-shadow: inset 0 0 10px rgba(34,211,238,.3);
+  overflow: auto;
+}
+
+/* CODE BLOCK = BIGGER */
+.result-box:nth-child(2) {
+  flex: 1.4;              /* 40% wider */
+}
+
+#codeOutput code {
+  font-size: 15px;
+  line-height: 1.5;
+}
