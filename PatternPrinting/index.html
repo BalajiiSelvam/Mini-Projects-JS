@@ -3,16 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Square Star Pattern</title>
+  <title>Star Pattern Generator</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h2>⭐ Square Star Pattern ⭐</h2>
-    <div>
-      <input type="number" id="size" placeholder="Enter N" min="1" />
-      <button onclick="printPattern()">Print</button>
+    <h2>Pattern Generator ⭐</h2>
+    
+    <div class="input-group">
+      <label for="pattern">Pattern Type:</label>
+      <select id="pattern">
+        <option value="square">Square</option>
+        <option value="left">Left Triangle</option>
+        <option value="right">Right Triangle</option>
+        <option value="inverted">Inverted Triangle</option>
+        <option value="hollowSquare">Hollow Square</option>
+      </select>
     </div>
+
+    <div class="input-group">
+      <label for="rows">Rows:</label>
+      <input type="number" id="rows" placeholder="Enter N" min="1" />
+    </div>
+
+    <button onclick="printPattern()">Print Pattern</button>
+
     <pre id="output"></pre>
   </div>
 
