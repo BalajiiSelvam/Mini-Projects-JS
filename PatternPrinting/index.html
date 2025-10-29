@@ -8,34 +8,46 @@
 </head>
 <body>
   <div class="container">
-    <h2>Pattern Generator ⭐</h2>
+    <h2>PATTERN GENERATOR</h2>
 
-    <div class="input-group">
-      <label for="pattern">Pattern Type:</label>
+    <div class="controls">
+      <label>Rows:</label>
+      <input type="number" id="rows" placeholder="Enter N" min="1" />
+
+      <label>Symbol:</label>
+      <input type="text" id="symbol" placeholder="*" maxlength="1" />
+
+      <label>Pattern:</label>
       <select id="pattern">
         <option value="square">Square</option>
-        <option value="hollowSquare">Hollow Square</option>
-        <option value="LShape">L Shape</option>
-        <option value="TShape">T Shape</option>
-        <option value="XShape">X Shape</option>
-        <option value="HShape">H Shape</option>
-        <option value="UShape">U Shape</option>
-        <option value="left">Left Triangle</option>
-        <option value="leftInverted">Left Inverted Triangle</option>
-        <option value="right">Right Triangle</option>
-        <option value="rightInverted">Right Inverted Triangle</option>
+        <option value="hollow-square">Hollow Square</option>
+        <option value="left-triangle">Left Triangle</option>
+        <option value="left-inverted">Left Inverted</option>
+        <option value="right-triangle">Right Triangle</option>
+        <option value="right-inverted">Right Inverted</option>
         <option value="pyramid">Pyramid</option>
         <option value="diamond">Diamond</option>
-        <option value="hollowDiamond">Hollow Diamond</option>
+        <option value="hollow-diamond">Hollow Diamond</option>
+        <option value="l-shape">L Shape</option>
+        <option value="t-shape">T Shape</option>
+        <option value="x-shape">X Shape</option>
+        <option value="h-shape">H Shape</option>
+        <option value="u-shape">U Shape</option>
       </select>
-    </div>
 
-    <div class="input-group">
-      <label for="rows">Rows:</label>
-      <input type="number" id="rows" placeholder="Enter N" min="1" />
-    </div>
+      <label>Color:</label>
+      <div class="color-circle-picker" id="colorPicker">
+        <div class="color-option" data-color="#00ff90"></div>
+        <div class="color-option" data-color="#ff6b6b"></div>
+        <div class="color-option" data-color="#4ecdc4"></div>
+        <div class="color-option" data-color="#ffe66d"></div>
+        <div class="color-option" data-color="#a29bfe"></div>
+        <div class="color-option" data-color="#fd79a8"></div>
+        <div class="color-option" data-color="#74b9ff"></div>
+      </div>
 
-    <button onclick="printPattern()">Print Pattern</button>
+      <button onclick="printPattern()">Generate</button>
+    </div>
 
     <pre id="output"></pre>
   </div>
