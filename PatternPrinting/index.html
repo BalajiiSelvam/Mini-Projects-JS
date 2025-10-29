@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="container">
-    <h2>PATTERN GENERATOR</h2>
+    <h2>Star Pattern Generator</h2>
 
     <div class="controls">
       <label>Rows:</label>
@@ -44,12 +44,26 @@
         <div class="color-option" data-color="#a29bfe"></div>
         <div class="color-option" data-color="#fd79a8"></div>
         <div class="color-option" data-color="#74b9ff"></div>
+        <div class="color-option" data-color="#fab1a0"></div>
+        <div class="color-option" data-color="#55efc4"></div>
+        <div class="color-option" data-color="#fdcb6e"></div>
       </div>
 
       <button onclick="printPattern()">Generate</button>
     </div>
 
-    <pre id="output"></pre>
+    <!-- ==== NEW: side-by-side layout ==== -->
+    <div class="result-wrapper">
+      <div class="result-box">
+        <h3>Pattern</h3>
+        <pre id="output"></pre>
+      </div>
+
+      <div class="result-box">
+        <h3>Code</h3>
+        <pre id="codeOutput"><code></code></pre>
+      </div>
+    </div>
   </div>
 
   <script src="script.js"></script>
