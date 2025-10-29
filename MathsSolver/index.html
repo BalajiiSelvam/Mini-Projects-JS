@@ -1,38 +1,31 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Handwritten Math Solver (Tesseract.js)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Handwritten Math Solver</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="app">
-    <h2>Handwritten Math Solver (Tesseract.js)</h2>
+  <div class="container">
+    <h1>Handwritten Math Solver</h1>
+    <p>Draw an equation → Click <strong>Solve</strong></p>
 
-    <div class="canvas-wrap">
-      <canvas id="drawCanvas" width="500" height="200"></canvas>
-      <div class="controls">
-        <button id="clearBtn">Clear</button>
-        <button id="undoBtn">Undo</button>
-      </div>
+    <canvas id="canvas" width="600" height="240"></canvas>
+
+    <div class="buttons">
+      <button id="clearBtn">🧹 Clear</button>
+      <button id="solveBtn">🚀 Solve</button>
     </div>
 
-    <div class="actions">
-      <button id="recognizeBtn">Recognize & Solve</button>
-    </div>
-
-    <div class="output">
-      <p><strong>OCR Text:</strong> <span id="ocrText">—</span></p>
-      <p><strong>Result:</strong> <span id="resultText">—</span></p>
-      <p id="error" class="error"></p>
-    </div>
+    <div id="result" class="result-box"></div>
   </div>
 
-  <!-- libs -->
-  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js"></script>
-
+  <!-- Load scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjs@12/lib/browser/math.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
   <script src="script.js"></script>
+
 </body>
 </html>

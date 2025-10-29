@@ -1,25 +1,131 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #66eac2 0%, #764ba2 100%);
+  color: #333;
+  min-height: 100vh;
   display: flex;
+  align-items: center;
   justify-content: center;
-  padding: 24px;
-  background: #f3f4f6;
+  padding: 20px;
 }
-.app {
-  width: 640px;
+
+.container {
   background: white;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  max-width: 700px;
+  width: 100%;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 10px;
+  color: #5a67d8;
+}
+
+p {
+  margin-bottom: 20px;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+#canvas {
+  border: 3px solid #4c51bf;
+  border-radius: 12px;
+  background: #fff;
+  cursor: crosshair;
+  display: block;
+  margin: 0 auto 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#clearBtn {
+  background: #fc8181;
+  color: white;
+}
+
+#clearBtn:hover {
+  background: #f56565;
+}
+
+#solveBtn {
+  background: #68d391;
+  color: white;
+}
+
+#solveBtn:hover {
+  background: #48bb78;
+}
+
+#solveBtn:disabled {
+  background: #a0aec0;
+  cursor: not-allowed;
+}
+
+.result-box {
+  margin-top: 20px;
+  padding: 16px;
+  background: #f7fafc;
   border-radius: 10px;
-  padding: 18px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  border: 1px solid #e2e8f0;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
 }
-canvas {
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  display:block;
-  background: white;
-  touch-action: none;
+
+.result-box b {
+  color: #2d3748;
+  font-size: 1.3rem;
 }
-.controls { margin-top: 8px; }
-.button, button { padding: 8px 12px; margin-right: 8px; }
-.output { margin-top: 12px; }
-.error { color: #b91c1c; }
+
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #e2e8f0;
+  border-top: 3px solid #5a67d8;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 10px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.copy-btn {
+  background: #63b3ed;
+  color: white;
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  margin-left: 8px;
+}
