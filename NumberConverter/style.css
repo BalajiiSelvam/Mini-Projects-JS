@@ -1,5 +1,5 @@
 body {
-  background: #0f172a;
+  background: #ffffff;
   color: #f1f5f9;
   font-family: 'Poppins', sans-serif;
   display: flex;
@@ -9,7 +9,7 @@ body {
 }
 
 .converter {
-  background: #1e293b;
+  background: #2d1e3b;
   padding: 30px;
   border-radius: 15px;
   box-shadow: 0 0 15px rgba(0,0,0,0.5);
@@ -18,7 +18,7 @@ body {
 }
 
 h2 {
-  color: #38bdf8;
+  color: #8b38f8;
 }
 
 .input-group {
@@ -36,7 +36,7 @@ select, input {
   padding: 8px;
   border: none;
   border-radius: 8px;
-  background: #334155;
+  background: #433355;
   color: #f1f5f9;
   font-size: 14px;
 }
@@ -44,7 +44,7 @@ select, input {
 button {
   margin-top: 15px;
   padding: 10px 20px;
-  background: #38bdf8;
+  background: #ab38f8;
   border: none;
   border-radius: 8px;
   color: #0f172a;
@@ -54,13 +54,13 @@ button {
 }
 
 button:hover {
-  background: #0ea5e9;
+  background: #990ee9;
 }
 
 .result {
   margin-top: 20px;
-  background: #334155;
+  background: #4a3355;
   padding: 10px;
   border-radius: 8px;
-  font-weight: bold;
+  font-weight: 200px;
 }

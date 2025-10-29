@@ -47,8 +47,8 @@ function convert() {
         break;
     }
 
-    resultBox.textContent = `✅ Result: ${convertedValue}`;
+    resultBox.textContent = `Result: ${convertedValue}`;
   } catch (err) {
-    resultBox.textContent = "❌ Invalid number for the selected type.";
+    resultBox.textContent = "Invalid number for the selected type.";
   }
 }
