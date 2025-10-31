@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Beautiful Language Translator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1: #0f172a;
+      --card: rgba(255,255,255,0.04);
+      --accent: linear-gradient(135deg,#7c3aed,#06b6d4);
+      --glass: rgba(255,255,255,0.03);
+      color-scheme: dark;
+    }
+    *{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial}
+    html,body{height:100%;margin:0;background:radial-gradient(1200px 600px at 10% 10%, rgba(99,102,241,0.12), transparent), radial-gradient(900px 400px at 90% 90%, rgba(6,182,212,0.06), transparent), var(--bg1);color:#e6eef8}
+    .wrap{max-width:1100px;margin:40px auto;padding:28px;border-radius:18px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);box-shadow:0 10px 30px rgba(2,6,23,0.6)}
+    header{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+    .logo{width:56px;height:56px;border-radius:12px;background:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;color:white;box-shadow:0 6px 18px rgba(124,58,237,0.18)}
+    h1{font-size:20px;margin:0}
+    p.lead{margin:0;color:#bcd3ee;opacity:0.9}
+
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border:1px solid rgba(255,255,255,0.03);padding:14px;border-radius:12px}
+    .controls{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+    select,button{background:transparent;border:1px solid rgba(255,255,255,0.06);color:inherit;padding:8px 10px;border-radius:8px}
+    textarea{width:100%;min-height:220px;background:transparent;border:1px dashed rgba(255,255,255,0.04);padding:12px;border-radius:10px;color:inherit;resize:vertical}
+    .row{display:flex;gap:8px}
+    .btn-primary{background:var(--accent);border:none;padding:10px 14px;border-radius:10px;color:white;cursor:pointer}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.05);padding:10px;border-radius:10px;cursor:pointer}
+    .muted{color:#9fb6d6;font-size:13px}
+    .center{display:flex;align-items:center;justify-content:center}
+    .swap{display:flex;align-items:center;justify-content:center;flex-direction:column}
+    .actions{display:flex;gap:8px;margin-top:8px}
+    .small{font-size:13px;padding:7px 9px}
+
+    footer{margin-top:14px;color:#93b2d6;font-size:13px;display:flex;justify-content:space-between;align-items:center}
+
+    /* responsive */
+    @media(max-width:880px){.grid{grid-template-columns:1fr;}.wrap{margin:16px;padding:16px}}
+
+    /* spinner */
+    .spinner{border:3px solid rgba(255,255,255,0.06);border-top:3px solid rgba(255,255,255,0.28);border-radius:50%;width:18px;height:18px;animation:spin 0.9s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">TR</div>
+      <div>
+        <h1>Beautiful Language Translator</h1>
+        <p class="lead">Quick translations with a sleek UI — supports speech and copy. Works with LibreTranslate public API.</p>
+      </div>
+    </header>
+
+    <div class="grid">
+      <div class="card">
+        <div class="controls">
+          <select id="fromLang"></select>
+          <select id="toLang"></select>
+          <div style="flex:1"></div>
+          <button id="swapBtn" class="btn-ghost" title="Swap languages">⇄ Swap</button>
+        </div>
+
+        <textarea id="source" placeholder="Type or paste text here..." spellcheck="true"></textarea>
+        <div class="actions">
+          <button id="translateBtn" class="btn-primary">Translate</button>
+          <button id="clearBtn" class="btn-ghost small">Clear</button>
+          <button id="copySrc" class="btn-ghost small">Copy</button>
+          <button id="speakSrc" class="btn-ghost small">Speak</button>
+          <div id="loading" style="display:none" class="center"><div class="spinner"></div></div>
+        </div>
+        <p class="muted">Tip: select target language and press Translate. Public API may rate-limit — for production get your own key.</p>
+      </div>
+
+      <div class="card">
+        <div class="controls">
+          <div style="flex:1"></div>
+          <button id="copyDst" class="btn-ghost small">Copy</button>
+          <button id="speakDst" class="btn-ghost small">Speak</button>
+          <button id="downloadBtn" class="btn-ghost small">Download</button>
+        </div>
+
+        <textarea id="dest" placeholder="Translation will appear here..." readonly></textarea>
+        <div class="actions" style="margin-top:10px">
+          <button id="detectBtn" class="btn-ghost small">Auto-detect (source)</button>
+          <button id="swapTextBtn" class="btn-ghost small">Swap Texts</button>
+        </div>
+        <p class="muted">Speech uses browser TTS. For better accuracy in production, use paid translation APIs.</p>
+      </div>
+    </div>
+
+    <footer>
+      <div>Made with ❤️ — Open-source demo</div>
+      <div class="muted">LibreTranslate endpoint: <span id="endpoint">https://libretranslate.de/translate</span></div>
+    </footer>
+  </div>
+
+  <script>
+    // language list (code: name)
+    const languages = {
+      'auto':'Auto-Detect',
+      'en':'English',
+      'hi':'Hindi',
+      'ta':'Tamil',
+      'te':'Telugu',
+      'fr':'French',
+      'es':'Spanish',
+      'de':'German',
+      'it':'Italian',
+      'pt':'Portuguese',
+      'ru':'Russian',
+      'zh':'Chinese',
+      'ja':'Japanese',
+      'ko':'Korean'
+    };
+
+    const fromSel = document.getElementById('fromLang');
+    const toSel = document.getElementById('toLang');
+    const src = document.getElementById('source');
+    const dst = document.getElementById('dest');
+    const translateBtn = document.getElementById('translateBtn');
+    const loadingEl = document.getElementById('loading');
+    const endpoint = 'https://libretranslate.de/translate'; // public instance
+
+    function populate(){
+      for(const [code,name] of Object.entries(languages)){
+        const o1 = document.createElement('option'); o1.value = code; o1.textContent = name + (code!=='auto' ? ` — ${code}` : '');
+        fromSel.appendChild(o1);
+        const o2 = document.createElement('option'); o2.value = code; o2.textContent = name + (code!=='auto' ? ` — ${code}` : '');
+        toSel.appendChild(o2);
+      }
+      fromSel.value = 'en';
+      toSel.value = 'hi';
+      fromSel.querySelector('option[value="auto"]').disabled = false;
+      // don't allow 'auto' as target
+      const autoOpt = toSel.querySelector('option[value="auto"]'); if(autoOpt) autoOpt.disabled = true;
+    }
+
+    populate();
+
+    async function translate(){
+      const text = src.value.trim();
+      if(!text){dst.value = ''; return}
+      showLoading(true);
+      try{
+        const payload = {q:text, source: fromSel.value === 'auto'? 'auto': fromSel.value, target: toSel.value, format: 'text'};
+        const res = await fetch(endpoint, {
+          method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload)
+        });
+        if(!res.ok) throw new Error('API error ' + res.status);
+        const data = await res.json();
+        // LibreTranslate returns {translatedText: '...'} or {error: '...'} depending on instance
+        dst.value = data.translatedText || data.result || JSON.stringify(data);
+      }catch(err){
+        dst.value = 'Translation failed — ' + err.message;
+      }finally{showLoading(false)}
+    }
+
+    function showLoading(s){loadingEl.style.display = s? 'flex':'none';translateBtn.disabled = s}
+
+    document.getElementById('swapBtn').addEventListener('click', ()=>{
+      const a = fromSel.value; fromSel.value = toSel.value === 'auto' ? 'en' : toSel.value; toSel.value = a === 'auto' ? 'en' : a;
+    });
+
+    document.getElementById('translateBtn').addEventListener('click', translate);
+    document.getElementById('clearBtn').addEventListener('click', ()=>{src.value=''; dst.value='';});
+
+    document.getElementById('copySrc').addEventListener('click', async ()=>{ if(!src.value) return; await navigator.clipboard.writeText(src.value); alert('Copied source');});
+    document.getElementById('copyDst').addEventListener('click', async ()=>{ if(!dst.value) return; await navigator.clipboard.writeText(dst.value); alert('Copied translation');});
+
+    document.getElementById('speakSrc').addEventListener('click', ()=> speakText(src.value, fromSel.value));
+    document.getElementById('speakDst').addEventListener('click', ()=> speakText(dst.value, toSel.value));
+
+    function speakText(text, lang){
+      if(!text) return alert('No text to speak');
+      try{
+        const ut = new SpeechSynthesisUtterance(text);
+        // pick voice matching language if available
+        const voices = speechSynthesis.getVoices();
+        const short = (lang || '').split('-')[0];
+        const match = voices.find(v=> v.lang && v.lang.toLowerCase().startsWith(short));
+        if(match) ut.voice = match;
+        ut.lang = lang === 'auto' ? 'en' : (lang||'en');
+        speechSynthesis.speak(ut);
+      }catch(e){alert('Speech not supported in this browser')}
+    }
+
+    document.getElementById('downloadBtn').addEventListener('click', ()=>{
+      const blob = new Blob([dst.value||''], {type:'text/plain'});
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'translation.txt'; a.click(); URL.revokeObjectURL(a.href);
+    });
+
+    document.getElementById('detectBtn').addEventListener('click', async ()=>{
+      const text = src.value.trim(); if(!text) return alert('Enter text to detect');
+      showLoading(true);
+      try{
+        const res = await fetch('https://libretranslate.de/detect', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({q:text})});
+        const data = await res.json();
+        // data is array [{language: 'en', confidence: 0.6}, ...]
+        if(Array.isArray(data) && data[0]){
+          fromSel.value = data[0].language;
+          alert('Detected: ' + data[0].language);
+        }else alert('Detection not available');
+      }catch(err){alert('Detection failed')}
+      finally{showLoading(false)}
+    });
+
+    document.getElementById('swapTextBtn').addEventListener('click', ()=>{
+      const t = src.value; src.value = dst.value; dst.value = t;
+    });
+
+    // allow Ctrl+Enter to translate
+    src.addEventListener('keydown', (e)=>{ if(e.ctrlKey && e.key==='Enter'){ translate(); }});
+
+    // warm up voices (some browsers load voices asynchronously)
+    if (typeof speechSynthesis !== 'undefined'){speechSynthesis.getVoices(); setTimeout(()=>speechSynthesis.getVoices(), 500)}
+  </script>
+</body>
+</html>
