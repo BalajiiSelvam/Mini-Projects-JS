@@ -1,0 +1,75 @@
+/* General layout */
+body {
+  background: linear-gradient(135deg, #2c3e50, #3498db);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Calculator box */
+.calculator {
+  background: #222;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  width: 300px;
+}
+
+/* Display */
+#display {
+  width: 100%;
+  height: 60px;
+  background: #000;
+  color: #0f0;
+  border: none;
+  border-radius: 10px;
+  font-size: 24px;
+  text-align: right;
+  padding: 10px;
+  margin-bottom: 15px;
+  outline: none;
+}
+
+/* Buttons grid */
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+/* Button design */
+.btn {
+  height: 60px;
+  border: none;
+  border-radius: 10px;
+  background: #333;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: #444;
+}
+
+/* Operator buttons */
+.operator {
+  background: #f39c12;
+}
+
+.operator:hover {
+  background: #e67e22;
+}
+
+/* Equal button */
+.equal {
+  grid-column: span 2;
+  background: #27ae60;
+}
+
+.equal:hover {
+  background: #2ecc71;
+}
