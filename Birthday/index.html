@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Birthday Greeting</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <div id="cake-container">
+      <img id="cake-svg-img" src="img/cake.png" alt="Birthday Cake">
+      <canvas id="cake-candle-canvas"></canvas>
+
+      <div class="greeting-card" id="greeting-card">
+        <div id="lottie-confetti" style="width:320px;max-width:90vw;margin:0 auto;"></div>
+
+        <!-- متن‌ها و دکمه زیر کیک -->
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 20px;">
+          <div id="congrats-message" style="display: none;">
+            Happy Birthday Matti ❤️!
+          </div>
+
+          <div id="celebrate-message" style="display: none;">
+            <audio id="birthday-audio" src="audio/birthday.mp3"></audio>
+          </div>
+
+          <button class="btn btn-secondary" id="reset-btn" style="display: none;">Restart</button>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-main" id="blow-instruction">Blow out the candle!</button>
+
+    <p style="margin-top: 20px;">First, make a wish. Then say:</p>
+    <h2 style="margin-top: 5px;">Happy birthday to me! and blow!</h2>
+  </div>
+
+  <script src="https://unpkg.com/lottie-web@5.12.2/build/player/lottie.min.js"></script>
+  <script src="js/candle_on_cake.js"></script>
+</body>
+</html>
